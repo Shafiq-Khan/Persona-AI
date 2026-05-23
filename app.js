@@ -1,5 +1,5 @@
 /* ============================================
-   Phoenix AI — Application Logic
+   Persona AI — Application Logic
    Ollama-powered chatbot with context memory
    ============================================ */
 
@@ -10,13 +10,13 @@
   const OLLAMA_BASE = 'http://localhost:11434';
   const OLLAMA_CHAT_URL = `${OLLAMA_BASE}/api/chat`;
   const MAX_CONTEXT_MESSAGES = 30; // keep last N messages for context
-  const STORAGE_KEY_MESSAGES = 'phoenix_ai_messages';
-  const STORAGE_KEY_MODEL = 'phoenix_ai_model';
+  const STORAGE_KEY_MESSAGES = 'persona_ai_messages';
+  const STORAGE_KEY_MODEL = 'persona_ai_model';
   const DEFAULT_MODEL = 'llama3.2';
 
   const SYSTEM_PROMPT = {
     role: 'system',
-    content: `You are Phoenix AI, a helpful, friendly, and knowledgeable personal assistant. You are warm and conversational while being precise and thorough. You remember context from the current conversation and refer back to it naturally. When writing code, use proper formatting with code blocks. Keep responses concise unless the user asks for detailed explanations.`
+    content: `You are Persona AI, a helpful, friendly, and knowledgeable personal assistant. You are warm and conversational while being precise and thorough. You remember context from the current conversation and refer back to it naturally. When writing code, use proper formatting with code blocks. Keep responses concise unless the user asks for detailed explanations.`
   };
 
   // ── DOM Elements ────────────────────────────
@@ -107,6 +107,7 @@
       chatInput.style.height = 'auto';
       chatInput.style.height = Math.min(chatInput.scrollHeight, 150) + 'px';
       sendBtn.disabled = !chatInput.value.trim() || isGenerating;
+      sendBtn.classList.toggle('enabled', !sendBtn.disabled);
     });
 
     // Clear chat
@@ -148,6 +149,12 @@
           handleSend();
         }
       });
+    });
+
+    // Send button ripple visual when clicked (keeps existing handler)
+    sendBtn.addEventListener('click', () => {
+      sendBtn.classList.add('clicked');
+      setTimeout(() => sendBtn.classList.remove('clicked'), 250);
     });
   }
 
@@ -322,11 +329,54 @@
     if (!animate) div.style.animation = 'none';
 
     const avatar = msg.role === 'user' ? '👤' : '🔥';
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     div.innerHTML = `
       <div class="message-avatar">${avatar}</div>
-      <div class="message-content">${renderMarkdown(msg.content)}</div>
+      <div class="message-body">
+        <div class="message-content">${renderMarkdown(msg.content)}</div>
+        <div class="message-meta">
+          <span class="msg-time">${time}</span>
+          <div class="message-actions">
+            <button class="action-btn copy-btn" title="Copy">📋</button>
+            <button class="action-btn react-btn" title="React">❤️</button>
+          </div>
+        </div>
+      </div>
     `;
     chatMessages.appendChild(div);
+
+    // Hook up action buttons
+    const copyBtn = div.querySelector('.copy-btn');
+    const reactBtn = div.querySelector('.react-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        try {
+          await navigator.clipboard.writeText(msg.content);
+          showToast('Message copied to clipboard', 'success');
+          errorToast.classList.add('toast-success');
+          setTimeout(() => errorToast.classList.remove('toast-success'), 1200);
+        } catch (err) {
+          showToast('Copy failed');
+        }
+      });
+    }
+    if (reactBtn) {
+      reactBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        let badge = div.querySelector('.reaction-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'reaction-badge';
+          badge.textContent = '❤️';
+          const contentEl = div.querySelector('.message-content');
+          contentEl.appendChild(badge);
+        } else {
+          // toggle
+          badge.remove();
+        }
+      });
+    }
   }
 
   function showTypingIndicator() {
@@ -345,6 +395,7 @@
     return div;
   }
 
+  // Auto scroll
   function scrollToBottom() {
     requestAnimationFrame(() => {
       chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -366,6 +417,7 @@
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     // Bold
+    html = html.replace(/\*\*(.+?)\*\"/g, '<strong>$1</strong>'); // wait, let's fix double stars:
     html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
     // Italic
@@ -424,6 +476,7 @@
     showToast(`Model switched to "${currentModel}"`, 'success');
   }
 
+  // Label update
   function updateModelLabel() {
     currentModelLabel.textContent = currentModel;
   }

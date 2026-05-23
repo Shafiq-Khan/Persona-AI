@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Phoenix AI — Your intelligent personal assistant powered by Ollama, running entirely on your machine." />
-  <title>Phoenix AI — Personal Assistant</title>
+  <meta name="description"
+    content="Persona AI — Your intelligent personal assistant powered by Ollama, running entirely on your machine." />
+  <title>Persona AI — Personal Assistant</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
 </head>
+
 <body>
   <div class="ambient-orb"></div>
   <div id="app">
@@ -17,7 +21,7 @@
       <div class="header-brand">
         <div class="header-logo">🔥</div>
         <div>
-          <div class="header-title">Phoenix AI</div>
+          <div class="header-title">Persona AI</div>
           <div class="header-subtitle">Powered by Ollama · Local & Private</div>
         </div>
       </div>
@@ -38,9 +42,9 @@
         <!-- Welcome screen (shown when no messages) -->
         <div class="welcome-screen" id="welcome-screen">
           <div class="welcome-icon">🔥</div>
-          <h1 class="welcome-title">Welcome to Phoenix AI</h1>
+          <h1 class="welcome-title">Welcome to Persona AI</h1>
           <p class="welcome-desc">
-            Your personal AI assistant running locally via Ollama. 
+            Your personal AI assistant running locally via Ollama.
             Fast, private, and completely offline. Ask me anything!
           </p>
           <div class="welcome-suggestions">
@@ -73,18 +77,13 @@
     <!-- ===== Input Area ===== -->
     <div class="input-area" id="input-area">
       <div class="input-wrapper">
-        <textarea 
-          id="chat-input" 
-          placeholder="Ask Phoenix anything..." 
-          rows="1"
-          autocomplete="off"
-        ></textarea>
+        <textarea id="chat-input" placeholder="Ask Persona anything..." rows="1" autocomplete="off"></textarea>
         <button id="send-btn" title="Send message" disabled>
           ➤
         </button>
       </div>
       <div class="input-footer">
-        Phoenix AI runs locally on your machine · Your conversations stay private
+        Persona AI runs locally on your machine · Your conversations stay private
       </div>
     </div>
 
@@ -95,17 +94,17 @@
     <div class="modal">
       <div class="modal-icon">🧠</div>
       <h2>Choose a Model</h2>
-      <p>Select which Ollama model Phoenix AI should use. Make sure the model is already pulled locally.</p>
+      <p>Select which Ollama model Persona AI should use. Make sure the model is already pulled locally.</p>
       <div class="modal-input-group">
         <label for="model-input">Model name</label>
         <input type="text" id="model-input" placeholder="e.g. llama3.2, mistral, phi3" />
       </div>
       <div class="modal-steps">
-        <strong>Popular models:</strong><br/>
-        • <strong>llama3.2</strong> — Meta's latest, great all-rounder<br/>
-        • <strong>mistral</strong> — Fast & capable<br/>
-        • <strong>phi3</strong> — Microsoft's compact powerhouse<br/>
-        • <strong>gemma2</strong> — Google's efficient model<br/><br/>
+        <strong>Popular models:</strong><br />
+        • <strong>llama3.2</strong> — Meta's latest, great all-rounder<br />
+        • <strong>mistral</strong> — Fast & capable<br />
+        • <strong>phi3</strong> — Microsoft's compact powerhouse<br />
+        • <strong>gemma2</strong> — Google's efficient model<br /><br />
         Pull a model: <code>ollama pull llama3.2</code>
       </div>
       <button class="modal-btn" id="model-save-btn">Save Model</button>
@@ -118,14 +117,14 @@
     <div class="modal">
       <div class="modal-icon">⚠️</div>
       <h2>Ollama Not Detected</h2>
-      <p>Phoenix AI can't connect to Ollama. Make sure it's installed and running.</p>
+      <p>Persona AI can't connect to Ollama. Make sure it's installed and running.</p>
       <div class="modal-steps">
-        <strong>Quick Setup:</strong><br/>
-        1. Download Ollama from <a href="https://ollama.com" target="_blank">ollama.com</a><br/>
-        2. Install and open it<br/>
-        3. Pull a model: <code>ollama pull llama3.2</code><br/>
-        4. It runs automatically on <strong>localhost:11434</strong><br/><br/>
-        <strong>CORS fix (if needed):</strong><br/>
+        <strong>Quick Setup:</strong><br />
+        1. Download Ollama from <a href="https://ollama.com" target="_blank">ollama.com</a><br />
+        2. Install and open it<br />
+        3. Pull a model: <code>ollama pull llama3.2</code><br />
+        4. It runs automatically on <strong>localhost:11434</strong><br /><br />
+        <strong>CORS fix (if needed):</strong><br />
         Set environment variable: <code>OLLAMA_ORIGINS=*</code>
       </div>
       <button class="modal-btn" id="retry-connection-btn">Retry Connection</button>
@@ -137,4 +136,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>

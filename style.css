@@ -3,7 +3,7 @@
    Sleek cybernetic elements with neon amber/orange glows
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600&family=Fira+Code:wght@400;600&display=swap');
 
 /* --- Design Tokens --- */
 :root {
@@ -17,21 +17,21 @@
   --bg-glass-border: rgba(245, 158, 11, 0.15);
   --bg-glass-border-hover: rgba(245, 158, 11, 0.35);
 
-  /* Phoenix Cyber Accents */
-  --accent-primary: #ff7b00;
-  --accent-secondary: #ff3c00;
-  --accent-cyan: #00f0ff;
-  --accent-glow: rgba(255, 123, 0, 0.2);
-  --accent-glow-strong: rgba(255, 123, 0, 0.45);
-  --gradient-phoenix: linear-gradient(135deg, #ff3c00, #ff7b00, #ffb700);
-  --gradient-phoenix-soft: linear-gradient(135deg, rgba(255, 60, 0, 0.15), rgba(255, 123, 0, 0.05));
-  --gradient-cyber: linear-gradient(90deg, #ff3c00, #00f0ff);
+  /* Updated Accent Palette (teal → purple) */
+  --accent-primary: #00d4c4;
+  --accent-secondary: #7c3aed;
+  --accent-cyan: #7ee7d7;
+  --accent-glow: rgba(0, 212, 196, 0.12);
+  --accent-glow-strong: rgba(124, 58, 237, 0.18);
+  --gradient-phoenix: linear-gradient(135deg, #00d4c4, #7c3aed);
+  --gradient-phoenix-soft: linear-gradient(135deg, rgba(0, 212, 196, 0.12), rgba(124, 58, 237, 0.06));
+  --gradient-cyber: linear-gradient(90deg, #7c3aed, #00d4c4);
 
   /* Typography */
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-tertiary: #475569;
-  --text-accent: #ffb700;
+  --text-accent: #7ee7d7;
 
   /* Sizing & Borders */
   --radius-sm: 6px;
@@ -73,7 +73,7 @@ html {
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-family: 'Inter', 'Poppins', -apple-system, sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -179,7 +179,7 @@ body::after {
 }
 
 .header-logo {
-  width: 42px;
+  width: 48px;
   height: 42px;
   border-radius: var(--radius-md);
   background: var(--gradient-phoenix);
@@ -210,7 +210,7 @@ body::after {
 }
 
 .header-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Poppins', 'Orbitron', sans-serif;
   font-size: 1.35rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -324,6 +324,78 @@ body::after {
   box-shadow: 0 0 35px var(--accent-primary);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+/* --- Interactive message actions --- */
+.message-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.msg-time {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  font-family: 'Inter', sans-serif;
+}
+
+.message-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 180ms ease;
+}
+
+.message:hover .message-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.action-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-primary);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.reaction-badge {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* Send button pulse when enabled */
+#send-btn.enabled {
+  animation: send-pulse 1.5s infinite;
+}
+
+@keyframes send-pulse {
+  0% { box-shadow: 0 0 12px rgba(0,212,196,0.18); transform: translateY(0) scale(1); }
+  50% { box-shadow: 0 0 28px rgba(124,58,237,0.22); transform: translateY(-2px) scale(1.03); }
+  100% { box-shadow: 0 0 12px rgba(0,212,196,0.18); transform: translateY(0) scale(1); }
+}
+
+/* Message hover micro-animations */
+.message { transition: transform 180ms ease, box-shadow 180ms ease; }
+.message:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(124,58,237,0.06); }
+
+/* Suggestion card subtle float */
+.suggestion-card { transition: transform 260ms var(--transition-fast), box-shadow 260ms var(--transition-fast); }
+.suggestion-card:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 18px 40px rgba(0,212,196,0.06); }
+
+/* Small utility for copy success */
+.toast-success { background: rgba(0,212,196,0.12) !important; color: var(--accent-primary) !important; border-color: rgba(0,212,196,0.18) !important; }
 
 .welcome-title {
   font-family: 'Orbitron', sans-serif;
