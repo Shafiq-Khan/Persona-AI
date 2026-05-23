@@ -1,24 +1,16 @@
-/* ============================================
-   Phoenix AI — Futuristic Glassmorphic Theme
-   Sleek cybernetic elements with neon amber/orange glows
-   ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600&family=Fira+Code:wght@400;600&display=swap');
 
-/* --- Design Tokens --- */
 :root {
-  /* Futuristic Dark Base */
-  --bg-primary: #040814;
+    --bg-primary: #040814;
   --bg-secondary: rgba(8, 14, 28, 0.7);
   --bg-tertiary: rgba(15, 23, 42, 0.45);
   --bg-glass: rgba(10, 17, 32, 0.45);
   
-  /* Cybernetic Glass Borders */
-  --bg-glass-border: rgba(245, 158, 11, 0.15);
+    --bg-glass-border: rgba(245, 158, 11, 0.15);
   --bg-glass-border-hover: rgba(245, 158, 11, 0.35);
 
-  /* Updated Accent Palette (teal → purple) */
-  --accent-primary: #00d4c4;
+    --accent-primary: #00d4c4;
   --accent-secondary: #7c3aed;
   --accent-cyan: #7ee7d7;
   --accent-glow: rgba(0, 212, 196, 0.12);
@@ -27,37 +19,31 @@
   --gradient-phoenix-soft: linear-gradient(135deg, rgba(0, 212, 196, 0.12), rgba(124, 58, 237, 0.06));
   --gradient-cyber: linear-gradient(90deg, #7c3aed, #00d4c4);
 
-  /* Typography */
-  --text-primary: #f8fafc;
+    --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-tertiary: #475569;
   --text-accent: #7ee7d7;
 
-  /* Sizing & Borders */
-  --radius-sm: 6px;
+    --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 30px;
   --radius-full: 9999px;
 
-  /* Cyber Glow Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.8);
   --shadow-glow: 0 0 15px rgba(255, 123, 0, 0.25), inset 0 0 15px rgba(255, 123, 0, 0.05);
   --shadow-glow-cyan: 0 0 15px rgba(0, 240, 255, 0.25);
 
-  /* Transitions */
-  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
   --transition-base: 300ms cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Dimensions */
-  --header-height: 70px;
+    --header-height: 70px;
   --max-chat-width: 860px;
 }
 
-/* --- Reset & Base --- */
 *,
 *::before,
 *::after {
@@ -81,7 +67,6 @@ body {
   position: relative;
 }
 
-/* Cybernetic Grid & Hologram Background Lines */
 body::before {
   content: '';
   position: fixed;
@@ -94,7 +79,6 @@ body::before {
   z-index: 0;
 }
 
-/* Animated Holographic Glowing Orbs */
 body::after {
   content: '';
   position: fixed;
@@ -128,7 +112,6 @@ body::after {
   100% { transform: translate(-20px, 40px) scale(0.9); }
 }
 
-/* --- Scrollbar --- */
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -147,7 +130,6 @@ body::after {
   box-shadow: 0 0 10px var(--accent-primary);
 }
 
-/* --- App Layout --- */
 #app {
   display: flex;
   flex-direction: column;
@@ -156,7 +138,6 @@ body::after {
   z-index: 1;
 }
 
-/* --- Futuristic Glass Header --- */
 .header {
   height: var(--header-height);
   display: flex;
@@ -284,7 +265,6 @@ body::after {
   box-shadow: 0 0 15px rgba(239, 68, 68, 0.25);
 }
 
-/* --- Chat Container --- */
 .chat-container {
   flex: 1;
   overflow-y: auto;
@@ -300,7 +280,6 @@ body::after {
   gap: 16px;
 }
 
-/* --- Cyber Welcome Screen --- */
 .welcome-screen {
   display: flex;
   flex-direction: column;
@@ -325,7 +304,6 @@ body::after {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* --- Interactive message actions --- */
 .message-body {
   display: flex;
   flex-direction: column;
@@ -375,7 +353,6 @@ body::after {
   vertical-align: middle;
 }
 
-/* Send button pulse when enabled */
 #send-btn.enabled {
   animation: send-pulse 1.5s infinite;
 }
@@ -386,15 +363,12 @@ body::after {
   100% { box-shadow: 0 0 12px rgba(0,212,196,0.18); transform: translateY(0) scale(1); }
 }
 
-/* Message hover micro-animations */
 .message { transition: transform 180ms ease, box-shadow 180ms ease; }
 .message:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(124,58,237,0.06); }
 
-/* Suggestion card subtle float */
 .suggestion-card { transition: transform 260ms var(--transition-fast), box-shadow 260ms var(--transition-fast); }
 .suggestion-card:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 18px 40px rgba(0,212,196,0.06); }
 
-/* Small utility for copy success */
 .toast-success { background: rgba(0,212,196,0.12) !important; color: var(--accent-primary) !important; border-color: rgba(0,212,196,0.18) !important; }
 
 .welcome-title {
@@ -464,7 +438,6 @@ body::after {
   line-height: 1.5;
 }
 
-/* --- Futuristic Glass Message Bubbles --- */
 .message {
   display: flex;
   gap: 16px;
@@ -541,13 +514,11 @@ body::after {
   box-shadow: inset 0 0 10px rgba(255, 123, 0, 0.02);
 }
 
-/* Streaming state */
 .message.assistant.streaming .message-content {
   border-color: rgba(255, 123, 0, 0.4);
   box-shadow: 0 0 15px rgba(255, 123, 0, 0.1);
 }
 
-/* Markdown Rendering Inside Glass Panels */
 .message-content p {
   margin-bottom: 12px;
 }
@@ -614,7 +585,6 @@ body::after {
   border-bottom-style: solid;
 }
 
-/* --- Typing Hologram --- */
 .typing-indicator {
   display: flex;
   gap: 16px;
@@ -662,7 +632,6 @@ body::after {
   30% { transform: translateY(-10px); opacity: 1; }
 }
 
-/* --- Glass Input Console --- */
 .input-area {
   padding: 20px 32px 28px;
   background: var(--bg-glass);
@@ -754,7 +723,6 @@ body::after {
   color: var(--text-tertiary);
 }
 
-/* --- Futuristic Modals --- */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -887,7 +855,6 @@ body::after {
   box-shadow: 0 0 30px rgba(255, 123, 0, 0.7);
 }
 
-/* Connection specific modal styles */
 #connection-modal .modal {
   border-color: rgba(0, 240, 255, 0.25);
   box-shadow: 0 0 50px rgba(0, 240, 255, 0.15);
@@ -913,7 +880,6 @@ body::after {
   box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
 }
 
-/* --- Cyber Error Toast --- */
 .error-toast {
   position: fixed;
   bottom: 110px;
@@ -943,7 +909,6 @@ body::after {
   pointer-events: auto;
 }
 
-/* --- Responsive Adjustments --- */
 @media (max-width: 640px) {
   .header {
     padding: 0 20px;
@@ -982,7 +947,6 @@ body::after {
   }
 }
 
-/* --- Landing Page --- */
 body.landing-page {
   overflow-y: auto;
   background:
@@ -1112,6 +1076,46 @@ body.landing-page::before {
   border: 1px solid rgba(126, 231, 215, 0.18);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.035);
+}
+
+.support-button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 8px;
+  color: #dffcf8;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(0, 212, 196, 0.08));
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 850;
+  white-space: nowrap;
+  box-shadow: 0 0 22px rgba(34, 197, 94, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.support-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.35), transparent 58%);
+  transform: translateX(-120%);
+  transition: transform 520ms ease;
+}
+
+.support-button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 197, 94, 0.55);
+  box-shadow: 0 0 34px rgba(34, 197, 94, 0.16);
+}
+
+.support-button:hover::after {
+  transform: translateX(120%);
 }
 
 .site-nav a:hover,
@@ -1807,7 +1811,166 @@ body.landing-page::before {
   animation: loading-bar 700ms ease-in-out infinite;
 }
 
-/* --- Tech Stack Page --- */
+.support-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(4, 8, 20, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1200;
+  transition: opacity 240ms ease, visibility 240ms ease;
+}
+
+.support-modal[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.support-card {
+  width: min(100%, 470px);
+  padding: 28px;
+  border: 1px solid rgba(126, 231, 215, 0.24);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(8, 14, 28, 0.94), rgba(4, 8, 20, 0.98));
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.58), 0 0 48px rgba(34, 197, 94, 0.1);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(18px) scale(0.97);
+  transition: transform 280ms ease;
+}
+
+.support-modal[aria-hidden="false"] .support-card {
+  transform: translateY(0) scale(1);
+}
+
+.support-glow {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  left: 50%;
+  top: -120px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.2), transparent 68%);
+  animation: support-glow 5s ease-in-out infinite alternate;
+}
+
+.support-card > *:not(.support-glow) {
+  position: relative;
+  z-index: 1;
+}
+
+.support-close {
+  min-height: 36px;
+  float: right;
+  padding: 0 12px;
+  border: 1px solid rgba(126, 231, 215, 0.18);
+  border-radius: 8px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+}
+
+.support-card h2 {
+  clear: both;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.support-copy,
+.support-note {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.support-copy {
+  margin-bottom: 20px;
+}
+
+.qr-frame {
+  width: min(100%, 310px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+  border: 1px solid rgba(126, 231, 215, 0.2);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.035);
+  position: relative;
+  overflow: hidden;
+  animation: qr-float 4.5s ease-in-out infinite;
+}
+
+.qr-frame::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed rgba(126, 231, 215, 0.24);
+  border-radius: 8px;
+  animation: vault-spin 18s linear infinite;
+}
+
+.qr-frame img {
+  width: calc(100% - 42px);
+  height: calc(100% - 42px);
+  object-fit: contain;
+  border-radius: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.qr-frame img:not([src]),
+.qr-frame img[src=""] {
+  display: none;
+}
+
+.qr-frame img {
+  background: #ffffff;
+}
+
+.qr-placeholder {
+  position: absolute;
+  inset: 32px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  text-align: center;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  background: rgba(4, 8, 20, 0.74);
+  z-index: 1;
+}
+
+.qr-placeholder strong {
+  color: var(--text-primary);
+  font-size: 1.15rem;
+}
+
+.qr-placeholder span {
+  max-width: 190px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.support-note {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
 .stack-page {
   background:
     radial-gradient(circle at 20% 18%, rgba(0, 212, 196, 0.18), transparent 30%),
@@ -2045,7 +2208,6 @@ body.landing-page::before {
   margin-bottom: 32px;
 }
 
-/* --- Workflow Page --- */
 .workflow-page {
   background:
     radial-gradient(circle at 18% 24%, rgba(124, 58, 237, 0.2), transparent 32%),
@@ -2258,7 +2420,6 @@ body.landing-page::before {
 .workflow-loop div:nth-child(3) { animation-delay: 1s; }
 .workflow-loop div:nth-child(4) { animation-delay: 1.5s; }
 
-/* --- Privacy Page --- */
 .privacy-page {
   background:
     radial-gradient(circle at 24% 18%, rgba(34, 197, 94, 0.14), transparent 30%),
@@ -2560,6 +2721,12 @@ body.landing-page::before {
     font-size: 0.78rem;
   }
 
+  .support-button {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 0.78rem;
+  }
+
   .site-nav .nav-chat-button {
     padding: 0 14px;
   }
@@ -2811,6 +2978,26 @@ body.landing-page::before {
   }
   50% {
     background: rgba(34, 197, 94, 0.1);
+  }
+}
+
+@keyframes support-glow {
+  from {
+    opacity: 0.45;
+    transform: translateX(-50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+@keyframes qr-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
   }
 }
 

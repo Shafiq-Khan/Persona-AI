@@ -1,15 +1,9 @@
-/* ============================================
-   Persona AI — Application Logic
-   Ollama-powered chatbot with context memory
-   ============================================ */
 
 (() => {
   'use strict';
-
-  // ── Config ──────────────────────────────────
   const OLLAMA_BASE = 'http://localhost:11434';
   const OLLAMA_CHAT_URL = `${OLLAMA_BASE}/api/chat`;
-  const MAX_CONTEXT_MESSAGES = 30; // keep last N messages for context
+  const MAX_CONTEXT_MESSAGES = 30;
   const STORAGE_KEY_MESSAGES = 'persona_ai_messages';
   const STORAGE_KEY_MODEL = 'persona_ai_model';
   const DEFAULT_MODEL = 'llama3.2';
@@ -18,8 +12,6 @@
     role: 'system',
     content: `You are Persona AI, a helpful, friendly, and knowledgeable personal assistant. You are warm and conversational while being precise and thorough. You remember context from the current conversation and refer back to it naturally. When writing code, use proper formatting with code blocks. Keep responses concise unless the user asks for detailed explanations.`
   };
-
-  // ── DOM Elements ────────────────────────────
   const $ = (sel) => document.querySelector(sel);
   const chatMessages = $('#chat-messages');
   const chatContainer = $('#chat-container');
@@ -36,14 +28,10 @@
   const connectionModal = $('#connection-modal');
   const retryConnectionBtn = $('#retry-connection-btn');
   const errorToast = $('#error-toast');
-
-  // ── State ───────────────────────────────────
-  let messages = []; // { role, content }
+  let messages = [];
   let currentModel = DEFAULT_MODEL;
   let isGenerating = false;
   let currentAbortController = null;
-
-  // ── Initialization ──────────────────────────
   function init() {
     loadState();
     renderMessages();
@@ -76,8 +64,6 @@
       console.warn('Failed to save state:', e);
     }
   }
-
-  // ── Ollama Connection Check ─────────────────
   async function checkOllamaConnection() {
     try {
       const res = await fetch(OLLAMA_BASE, { method: 'GET', signal: AbortSignal.timeout(5000) });
@@ -86,15 +72,11 @@
         return true;
       }
     } catch (e) {
-      // Connection failed
     }
     connectionModal.classList.remove('hidden');
     return false;
   }
-
-  // ── Event Bindings ──────────────────────────
   function bindEvents() {
-    // Send message
     sendBtn.addEventListener('click', handleSend);
     chatInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -102,19 +84,13 @@
         handleSend();
       }
     });
-
-    // Auto-resize textarea
     chatInput.addEventListener('input', () => {
       chatInput.style.height = 'auto';
       chatInput.style.height = Math.min(chatInput.scrollHeight, 150) + 'px';
       sendBtn.disabled = !chatInput.value.trim() || isGenerating;
       sendBtn.classList.toggle('enabled', !sendBtn.disabled);
     });
-
-    // Clear chat
     clearBtn.addEventListener('click', handleClear);
-
-    // Model modal
     modelBtn.addEventListener('click', () => {
       modelInput.value = currentModel;
       modelError.classList.remove('visible');
@@ -126,21 +102,15 @@
     modelInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') handleModelSave();
     });
-
-    // Close modals on overlay click
     modelModal.addEventListener('click', (e) => {
       if (e.target === modelModal) modelModal.classList.add('hidden');
     });
-
-    // Retry connection
     retryConnectionBtn.addEventListener('click', async () => {
       retryConnectionBtn.textContent = 'Connecting...';
       const ok = await checkOllamaConnection();
       retryConnectionBtn.textContent = ok ? 'Connected!' : 'Retry Connection';
       if (!ok) showToast('Still can\'t reach Ollama. Make sure it\'s running.');
     });
-
-    // Suggestion cards
     document.querySelectorAll('.suggestion-card').forEach((card) => {
       card.addEventListener('click', () => {
         const prompt = card.getAttribute('data-prompt');
@@ -151,8 +121,6 @@
         }
       });
     });
-
-    // Send button ripple visual when clicked (keeps existing handler)
     sendBtn.addEventListener('click', () => {
       sendBtn.classList.add('clicked');
       setTimeout(() => sendBtn.classList.remove('clicked'), 250);
@@ -171,42 +139,25 @@
     const cleanUrl = `${window.location.pathname}${window.location.hash}`;
     window.history.replaceState({}, document.title, cleanUrl);
   }
-
-  // ── Send Message ────────────────────────────
   async function handleSend() {
     const text = chatInput.value.trim();
     if (!text || isGenerating) return;
-
-    // Hide welcome screen
     if (welcomeScreen) {
       welcomeScreen.style.display = 'none';
     }
-
-    // Add user message
     const userMsg = { role: 'user', content: text };
     messages.push(userMsg);
     appendMessageToDOM(userMsg);
     saveState();
-
-    // Clear input
     chatInput.value = '';
     chatInput.style.height = 'auto';
     sendBtn.disabled = true;
-
-    // Scroll to bottom
     scrollToBottom();
-
-    // Show typing indicator
     const typingEl = showTypingIndicator();
-
-    // Generate response
     isGenerating = true;
     try {
       const assistantContent = await streamResponse();
-      // Remove typing indicator
       typingEl.remove();
-
-      // Add assistant message
       const assistantMsg = { role: 'assistant', content: assistantContent };
       messages.push(assistantMsg);
       appendMessageToDOM(assistantMsg);
@@ -214,11 +165,9 @@
     } catch (err) {
       typingEl.remove();
       if (err.name === 'AbortError') {
-        // User cancelled — do nothing
       } else {
         console.error('Generation error:', err);
         showToast(getErrorMessage(err));
-        // Add error as a system message visually
         const errorMsg = { role: 'assistant', content: `⚠️ **Error:** ${getErrorMessage(err)}` };
         appendMessageToDOM(errorMsg);
       }
@@ -230,12 +179,8 @@
 
     scrollToBottom();
   }
-
-  // ── Stream Response from Ollama ─────────────
   async function streamResponse() {
     currentAbortController = new AbortController();
-
-    // Build context: system prompt + last N messages
     const contextMessages = [
       SYSTEM_PROMPT,
       ...messages.slice(-MAX_CONTEXT_MESSAGES)
@@ -259,8 +204,6 @@
       }
       throw new Error(`Ollama returned ${res.status}: ${errBody || 'Unknown error'}`);
     }
-
-    // Read streaming response
     const reader = res.body.getReader();
     const decoder = new TextDecoder('utf-8');
     let fullContent = '';
@@ -279,10 +222,7 @@
           const json = JSON.parse(line);
           if (json.message?.content) {
             fullContent += json.message.content;
-
-            // Create or update the streaming bubble
             if (!streamBubble) {
-              // Remove typing indicator and create assistant bubble
               const typingEl = chatMessages.querySelector('.typing-indicator');
               if (typingEl) typingEl.remove();
               streamBubble = createStreamBubble();
@@ -291,20 +231,15 @@
             scrollToBottom();
           }
         } catch (e) {
-          // Skip malformed JSON lines
         }
       }
     }
-
-    // If we got a stream bubble, remove it (we'll add the final message via appendMessageToDOM)
     if (streamBubble) {
       streamBubble.remove();
     }
 
     return fullContent;
   }
-
-  // ── Create streaming bubble ─────────────────
   function createStreamBubble() {
     const wrapper = document.createElement('div');
     wrapper.className = 'message assistant streaming';
@@ -320,10 +255,7 @@
     const contentEl = bubble.querySelector('.message-content');
     contentEl.innerHTML = renderMarkdown(content);
   }
-
-  // ── DOM Rendering ───────────────────────────
   function renderMessages() {
-    // Clear all except welcome screen
     const welcome = welcomeScreen;
     chatMessages.innerHTML = '';
     if (welcome) chatMessages.appendChild(welcome);
@@ -358,8 +290,6 @@
       </div>
     `;
     chatMessages.appendChild(div);
-
-    // Hook up action buttons
     const copyBtn = div.querySelector('.copy-btn');
     const reactBtn = div.querySelector('.react-btn');
     if (copyBtn) {
@@ -386,7 +316,6 @@
           const contentEl = div.querySelector('.message-content');
           contentEl.appendChild(badge);
         } else {
-          // toggle
           badge.remove();
         }
       });
@@ -408,51 +337,29 @@
     scrollToBottom();
     return div;
   }
-
-  // Auto scroll
   function scrollToBottom() {
     requestAnimationFrame(() => {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     });
   }
-
-  // ── Markdown Renderer (lightweight) ─────────
   function renderMarkdown(text) {
     if (!text) return '';
 
     let html = escapeHtml(text);
-
-    // Code blocks (```...```)
     html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
       return `<pre><code class="language-${lang}">${code.trim()}</code></pre>`;
     });
-
-    // Inline code
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-    // Bold
-    html = html.replace(/\*\*(.+?)\*\"/g, '<strong>$1</strong>'); // wait, let's fix double stars:
+    html = html.replace(/\*\*(.+?)\*\"/g, '<strong>$1</strong>');
     html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-    // Italic
     html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-
-    // Unordered lists
     html = html.replace(/^[\s]*[-•]\s+(.+)$/gm, '<li>$1</li>');
     html = html.replace(/((?:<li>.*<\/li>\s*)+)/g, '<ul>$1</ul>');
-
-    // Ordered lists
     html = html.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
-
-    // Line breaks → paragraphs
     html = html.replace(/\n\n+/g, '</p><p>');
     html = html.replace(/\n/g, '<br/>');
     html = `<p>${html}</p>`;
-
-    // Clean up empty paragraphs
     html = html.replace(/<p>\s*<\/p>/g, '');
-
-    // Don't wrap pre blocks in paragraphs
     html = html.replace(/<p>(<pre>)/g, '$1');
     html = html.replace(/(<\/pre>)<\/p>/g, '$1');
 
@@ -464,8 +371,6 @@
     div.textContent = text;
     return div.innerHTML;
   }
-
-  // ── Clear Chat ──────────────────────────────
   function handleClear() {
     if (isGenerating) {
       if (currentAbortController) currentAbortController.abort();
@@ -474,8 +379,6 @@
     saveState();
     renderMessages();
   }
-
-  // ── Model Management ────────────────────────
   function handleModelSave() {
     const name = modelInput.value.trim();
     if (!name) {
@@ -489,13 +392,9 @@
     modelModal.classList.add('hidden');
     showToast(`Model switched to "${currentModel}"`, 'success');
   }
-
-  // Label update
   function updateModelLabel() {
     currentModelLabel.textContent = currentModel;
   }
-
-  // ── Toast Notifications ─────────────────────
   function showToast(message, type = 'error') {
     errorToast.textContent = message;
     errorToast.style.borderColor = type === 'success'
@@ -511,8 +410,6 @@
       errorToast.classList.remove('visible');
     }, 4000);
   }
-
-  // ── Error Messages ──────────────────────────
   function getErrorMessage(err) {
     const msg = err.message || String(err);
     if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
@@ -523,7 +420,5 @@
     }
     return msg;
   }
-
-  // ── Start ───────────────────────────────────
   init();
 })();
