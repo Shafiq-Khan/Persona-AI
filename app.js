@@ -49,6 +49,7 @@
     renderMessages();
     updateModelLabel();
     bindEvents();
+    applyInitialPrompt();
     checkOllamaConnection();
   }
 
@@ -156,6 +157,19 @@
       sendBtn.classList.add('clicked');
       setTimeout(() => sendBtn.classList.remove('clicked'), 250);
     });
+  }
+
+  function applyInitialPrompt() {
+    const params = new URLSearchParams(window.location.search);
+    const prompt = params.get('prompt');
+    if (!prompt || !chatInput) return;
+
+    chatInput.value = prompt;
+    chatInput.dispatchEvent(new Event('input'));
+    chatInput.focus();
+
+    const cleanUrl = `${window.location.pathname}${window.location.hash}`;
+    window.history.replaceState({}, document.title, cleanUrl);
   }
 
   // ── Send Message ────────────────────────────

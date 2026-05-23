@@ -5,136 +5,149 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Persona AI — Your intelligent personal assistant powered by Ollama, running entirely on your machine." />
-  <title>Persona AI — Personal Assistant</title>
+    content="Persona AI is a private local assistant for fast answers, coding help, planning, and creative work." />
+  <title>Persona AI - Private Local Assistant</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
 </head>
 
-<body>
-  <div class="ambient-orb"></div>
-  <div id="app">
+<body class="landing-page">
+  <div id="landing-app">
+    <header class="site-header">
+      <a class="site-brand" href="index.html" aria-label="Persona AI home">
+        <span class="brand-mark">P</span>
+        <span>Persona AI</span>
+      </a>
 
-    <!-- ===== Header ===== -->
-    <header class="header" id="header">
-      <div class="header-brand">
-        <div class="header-logo">🔥</div>
-        <div>
-          <div class="header-title">Persona AI</div>
-          <div class="header-subtitle">Powered by Ollama · Local & Private</div>
-        </div>
-      </div>
-      <div class="header-actions">
-        <button class="header-btn" id="model-btn" title="Change model">
-          🧠 <span id="current-model-label">llama3.2</span>
-        </button>
-        <button class="header-btn danger" id="clear-btn" title="Clear conversation">
-          🗑️ <span>Clear</span>
-        </button>
-      </div>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#workflow">Workflow</a>
+        <a class="stack-nav-link" href="tech-stack.html">Tech Stack</a>
+        <a class="nav-chat-button" href="chat.html">Talk to AI</a>
+      </nav>
     </header>
 
-    <!-- ===== Chat Messages ===== -->
-    <main class="chat-container" id="chat-container">
-      <div class="chat-messages" id="chat-messages">
+    <main>
+      <div class="motion-field" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-        <!-- Welcome screen (shown when no messages) -->
-        <div class="welcome-screen" id="welcome-screen">
-          <div class="welcome-icon">🔥</div>
-          <h1 class="welcome-title">Welcome to Persona AI</h1>
-          <p class="welcome-desc">
-            Your personal AI assistant running locally via Ollama.
-            Fast, private, and completely offline. Ask me anything!
+      <section class="landing-hero">
+        <div class="hero-copy">
+          <p class="hero-kicker">Private local AI assistant</p>
+          <h1>Persona AI</h1>
+          <p class="hero-text">
+            A focused assistant for asking questions, writing code, planning ideas, and working through creative tasks
+            while keeping the experience fast, calm, and personal.
           </p>
-          <div class="welcome-suggestions">
-            <div class="suggestion-card" data-prompt="Explain quantum computing in simple terms">
-              <div class="icon">⚛️</div>
-              <div class="title">Explain a concept</div>
-              <div class="desc">Break down complex topics simply</div>
-            </div>
-            <div class="suggestion-card" data-prompt="Write a Python function that sorts a list using merge sort">
-              <div class="icon">💻</div>
-              <div class="title">Write some code</div>
-              <div class="desc">Generate code in any language</div>
-            </div>
-            <div class="suggestion-card" data-prompt="Help me brainstorm creative names for a tech startup">
-              <div class="icon">💡</div>
-              <div class="title">Brainstorm ideas</div>
-              <div class="desc">Creative thinking & ideation</div>
-            </div>
-            <div class="suggestion-card" data-prompt="Summarize the key principles of effective communication">
-              <div class="icon">📝</div>
-              <div class="title">Summarize content</div>
-              <div class="desc">Condense info into key points</div>
-            </div>
+          <div class="hero-actions">
+            <a class="primary-cta chat-link" href="chat.html">Start Chatting</a>
+            <a class="secondary-cta" href="#features">Explore Features</a>
           </div>
+          <div class="prompt-ribbon" aria-label="Example prompts">
+            <a href="chat.html?prompt=Plan%20my%20study%20routine" class="prompt-chip chat-link">Plan my study routine</a>
+            <a href="chat.html?prompt=Debug%20my%20JavaScript%20code" class="prompt-chip chat-link">Debug my JavaScript code</a>
+            <a href="chat.html?prompt=Summarize%20this%20topic" class="prompt-chip chat-link">Summarize this topic</a>
+          </div>
+          <dl class="hero-stats" aria-label="Persona AI highlights">
+            <div>
+              <dt>Local</dt>
+              <dd>Ollama powered</dd>
+            </div>
+            <div>
+              <dt>Private</dt>
+              <dd>Chats stay close</dd>
+            </div>
+            <div>
+              <dt>Useful</dt>
+              <dd>Code, ideas, answers</dd>
+            </div>
+          </dl>
         </div>
 
-      </div>
+        <div class="ai-product-preview" aria-label="Persona AI chat preview">
+          <div class="preview-toolbar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <strong>Persona AI</strong>
+          </div>
+          <div class="preview-status">
+            <span class="status-dot"></span>
+            <span>Ready for your next prompt</span>
+          </div>
+          <div class="preview-message assistant-preview">
+            <span class="preview-avatar">AI</span>
+            <p>I can help you turn rough thoughts into clear answers, code, plans, and next steps.</p>
+          </div>
+          <div class="preview-message user-preview">
+            <p>Help me build a landing page for my chatbot.</p>
+            <span class="preview-avatar">You</span>
+          </div>
+          <div class="preview-message assistant-preview">
+            <span class="preview-avatar">AI</span>
+            <p>Done. I will keep the chat button easy to find and make the page feel polished.</p>
+          </div>
+          <div class="typing-preview" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="preview-input">
+            <span>Ask Persona anything...</span>
+            <a class="chat-link" href="chat.html" aria-label="Open Persona AI chat">Go</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-strip" id="features" aria-label="Persona AI features">
+        <article>
+          <span class="feature-index">01</span>
+          <h2>Fast Answers</h2>
+          <p>Ask for explanations, summaries, ideas, and practical next steps without leaving the page.</p>
+        </article>
+        <article>
+          <span class="feature-index">02</span>
+          <h2>Code Help</h2>
+          <p>Use Persona AI for debugging, snippets, architecture thinking, and learning new concepts.</p>
+        </article>
+        <article id="privacy">
+          <span class="feature-index">03</span>
+          <h2>Local Privacy</h2>
+          <p>Designed around your local Ollama setup so conversations stay close to your machine.</p>
+        </article>
+      </section>
+
+      <section class="workflow-band" id="workflow" aria-label="How Persona AI helps">
+        <div class="workflow-copy">
+          <p class="hero-kicker">From thought to answer</p>
+          <h2>Work with Persona in three smooth moves.</h2>
+        </div>
+        <div class="workflow-steps">
+          <article>
+            <span>Ask</span>
+            <p>Drop in a question, idea, code problem, or rough plan.</p>
+          </article>
+          <article>
+            <span>Refine</span>
+            <p>Keep the conversation going until the answer feels right.</p>
+          </article>
+          <article>
+            <span>Use</span>
+            <p>Turn the result into your next paragraph, decision, or build step.</p>
+          </article>
+        </div>
+      </section>
     </main>
-
-    <!-- ===== Input Area ===== -->
-    <div class="input-area" id="input-area">
-      <div class="input-wrapper">
-        <textarea id="chat-input" placeholder="Ask Persona anything..." rows="1" autocomplete="off"></textarea>
-        <button id="send-btn" title="Send message" disabled>
-          ➤
-        </button>
-      </div>
-      <div class="input-footer">
-        Persona AI runs locally on your machine · Your conversations stay private
-      </div>
-    </div>
-
+    <a class="floating-chat chat-link" href="chat.html">Talk to Persona</a>
   </div>
-
-  <!-- ===== Model Selector Modal ===== -->
-  <div class="modal-overlay hidden" id="model-modal">
-    <div class="modal">
-      <div class="modal-icon">🧠</div>
-      <h2>Choose a Model</h2>
-      <p>Select which Ollama model Persona AI should use. Make sure the model is already pulled locally.</p>
-      <div class="modal-input-group">
-        <label for="model-input">Model name</label>
-        <input type="text" id="model-input" placeholder="e.g. llama3.2, mistral, phi3" />
-      </div>
-      <div class="modal-steps">
-        <strong>Popular models:</strong><br />
-        • <strong>llama3.2</strong> — Meta's latest, great all-rounder<br />
-        • <strong>mistral</strong> — Fast & capable<br />
-        • <strong>phi3</strong> — Microsoft's compact powerhouse<br />
-        • <strong>gemma2</strong> — Google's efficient model<br /><br />
-        Pull a model: <code>ollama pull llama3.2</code>
-      </div>
-      <button class="modal-btn" id="model-save-btn">Save Model</button>
-      <div class="modal-error" id="model-error">Please enter a model name.</div>
-    </div>
+  <div class="page-transition" aria-hidden="true">
+    <span>Opening Persona AI</span>
   </div>
-
-  <!-- ===== Connection Error Modal ===== -->
-  <div class="modal-overlay hidden" id="connection-modal">
-    <div class="modal">
-      <div class="modal-icon">⚠️</div>
-      <h2>Ollama Not Detected</h2>
-      <p>Persona AI can't connect to Ollama. Make sure it's installed and running.</p>
-      <div class="modal-steps">
-        <strong>Quick Setup:</strong><br />
-        1. Download Ollama from <a href="https://ollama.com" target="_blank">ollama.com</a><br />
-        2. Install and open it<br />
-        3. Pull a model: <code>ollama pull llama3.2</code><br />
-        4. It runs automatically on <strong>localhost:11434</strong><br /><br />
-        <strong>CORS fix (if needed):</strong><br />
-        Set environment variable: <code>OLLAMA_ORIGINS=*</code>
-      </div>
-      <button class="modal-btn" id="retry-connection-btn">Retry Connection</button>
-    </div>
-  </div>
-
-  <!-- ===== Error Toast ===== -->
-  <div class="error-toast" id="error-toast"></div>
-
-  <script src="app.js"></script>
+  <script src="landing.js"></script>
 </body>
 
 </html>

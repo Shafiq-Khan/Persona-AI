@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Explore the technology stack behind Persona AI, a private local chatbot powered by web technologies and Ollama." />
+  <title>Persona AI - Tech Stack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="landing-page stack-page">
+  <div id="landing-app">
+    <header class="site-header">
+      <a class="site-brand" href="index.html" aria-label="Persona AI home">
+        <span class="brand-mark">P</span>
+        <span>Persona AI</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#workflow">Workflow</a>
+        <a class="stack-nav-link" href="tech-stack.html">Tech Stack</a>
+        <a class="nav-chat-button chat-link" href="chat.html">Talk to AI</a>
+      </nav>
+    </header>
+
+    <main class="stack-main">
+      <div class="stack-orbit" aria-hidden="true">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JS</span>
+        <span>AI</span>
+      </div>
+
+      <section class="stack-hero">
+        <div class="stack-hero-copy">
+          <p class="hero-kicker">Persona AI architecture</p>
+          <h1>Tech Stack</h1>
+          <p>
+            Persona AI is built as a fast browser experience connected to a local AI runtime. The result is a smooth
+            chatbot interface with private conversations, animated UI, and simple deployment.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-cta chat-link" href="chat.html">Open Chatbot</a>
+            <a class="secondary-cta" href="index.html">Back Home</a>
+          </div>
+        </div>
+
+        <div class="stack-terminal" aria-label="Persona AI stack terminal preview">
+          <div class="terminal-top">
+            <span></span>
+            <span></span>
+            <span></span>
+            <strong>persona-ai-stack</strong>
+          </div>
+          <pre><code>frontend: HTML + CSS + JavaScript
+runtime:  Ollama on localhost:11434
+storage:  Browser Local Storage
+network:  Fetch API streaming
+design:   Responsive animated UI
+status:   Ready</code></pre>
+        </div>
+      </section>
+
+      <section class="stack-showcase" aria-label="Persona AI stack cards">
+        <article>
+          <span class="stack-number">01</span>
+          <h2>HTML5</h2>
+          <p>Semantic pages for the landing experience, chat surface, and stack walkthrough.</p>
+        </article>
+        <article>
+          <span class="stack-number">02</span>
+          <h2>CSS3</h2>
+          <p>Responsive layout, glass styling, motion, hover states, and accessibility-friendly animations.</p>
+        </article>
+        <article>
+          <span class="stack-number">03</span>
+          <h2>JavaScript</h2>
+          <p>Chat logic, prompt prefill, streaming UI updates, scroll reveals, transitions, and interaction polish.</p>
+        </article>
+        <article>
+          <span class="stack-number">04</span>
+          <h2>Ollama</h2>
+          <p>Local model runtime powering private responses directly from your machine.</p>
+        </article>
+        <article>
+          <span class="stack-number">05</span>
+          <h2>Fetch API</h2>
+          <p>Connects the browser to Ollama and streams responses into the chatbot interface.</p>
+        </article>
+        <article>
+          <span class="stack-number">06</span>
+          <h2>Local Storage</h2>
+          <p>Saves conversations and the selected model so the assistant feels persistent.</p>
+        </article>
+      </section>
+
+      <section class="stack-flow" aria-label="How the stack works">
+        <div>
+          <span>Prompt</span>
+          <p>User writes a message in the chat UI.</p>
+        </div>
+        <div>
+          <span>Request</span>
+          <p>JavaScript sends a streaming request to Ollama.</p>
+        </div>
+        <div>
+          <span>Response</span>
+          <p>Persona AI renders the answer as it arrives.</p>
+        </div>
+      </section>
+    </main>
+    <a class="floating-chat chat-link" href="chat.html">Talk to Persona</a>
+  </div>
+  <div class="page-transition" aria-hidden="true">
+    <span>Opening Persona AI</span>
+  </div>
+  <script src="landing.js"></script>
+</body>
+
+</html>
