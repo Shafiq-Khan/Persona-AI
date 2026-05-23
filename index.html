@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Phoenix AI — Your intelligent personal assistant powered by Ollama, running entirely on your machine." />
+  <title>Phoenix AI — Personal Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
+</head>
+<body>
+  <div class="ambient-orb"></div>
+  <div id="app">
+
+    <!-- ===== Header ===== -->
+    <header class="header" id="header">
+      <div class="header-brand">
+        <div class="header-logo">🔥</div>
+        <div>
+          <div class="header-title">Phoenix AI</div>
+          <div class="header-subtitle">Powered by Ollama · Local & Private</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="header-btn" id="model-btn" title="Change model">
+          🧠 <span id="current-model-label">llama3.2</span>
+        </button>
+        <button class="header-btn danger" id="clear-btn" title="Clear conversation">
+          🗑️ <span>Clear</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== Chat Messages ===== -->
+    <main class="chat-container" id="chat-container">
+      <div class="chat-messages" id="chat-messages">
+
+        <!-- Welcome screen (shown when no messages) -->
+        <div class="welcome-screen" id="welcome-screen">
+          <div class="welcome-icon">🔥</div>
+          <h1 class="welcome-title">Welcome to Phoenix AI</h1>
+          <p class="welcome-desc">
+            Your personal AI assistant running locally via Ollama. 
+            Fast, private, and completely offline. Ask me anything!
+          </p>
+          <div class="welcome-suggestions">
+            <div class="suggestion-card" data-prompt="Explain quantum computing in simple terms">
+              <div class="icon">⚛️</div>
+              <div class="title">Explain a concept</div>
+              <div class="desc">Break down complex topics simply</div>
+            </div>
+            <div class="suggestion-card" data-prompt="Write a Python function that sorts a list using merge sort">
+              <div class="icon">💻</div>
+              <div class="title">Write some code</div>
+              <div class="desc">Generate code in any language</div>
+            </div>
+            <div class="suggestion-card" data-prompt="Help me brainstorm creative names for a tech startup">
+              <div class="icon">💡</div>
+              <div class="title">Brainstorm ideas</div>
+              <div class="desc">Creative thinking & ideation</div>
+            </div>
+            <div class="suggestion-card" data-prompt="Summarize the key principles of effective communication">
+              <div class="icon">📝</div>
+              <div class="title">Summarize content</div>
+              <div class="desc">Condense info into key points</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ===== Input Area ===== -->
+    <div class="input-area" id="input-area">
+      <div class="input-wrapper">
+        <textarea 
+          id="chat-input" 
+          placeholder="Ask Phoenix anything..." 
+          rows="1"
+          autocomplete="off"
+        ></textarea>
+        <button id="send-btn" title="Send message" disabled>
+          ➤
+        </button>
+      </div>
+      <div class="input-footer">
+        Phoenix AI runs locally on your machine · Your conversations stay private
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Model Selector Modal ===== -->
+  <div class="modal-overlay hidden" id="model-modal">
+    <div class="modal">
+      <div class="modal-icon">🧠</div>
+      <h2>Choose a Model</h2>
+      <p>Select which Ollama model Phoenix AI should use. Make sure the model is already pulled locally.</p>
+      <div class="modal-input-group">
+        <label for="model-input">Model name</label>
+        <input type="text" id="model-input" placeholder="e.g. llama3.2, mistral, phi3" />
+      </div>
+      <div class="modal-steps">
+        <strong>Popular models:</strong><br/>
+        • <strong>llama3.2</strong> — Meta's latest, great all-rounder<br/>
+        • <strong>mistral</strong> — Fast & capable<br/>
+        • <strong>phi3</strong> — Microsoft's compact powerhouse<br/>
+        • <strong>gemma2</strong> — Google's efficient model<br/><br/>
+        Pull a model: <code>ollama pull llama3.2</code>
+      </div>
+      <button class="modal-btn" id="model-save-btn">Save Model</button>
+      <div class="modal-error" id="model-error">Please enter a model name.</div>
+    </div>
+  </div>
+
+  <!-- ===== Connection Error Modal ===== -->
+  <div class="modal-overlay hidden" id="connection-modal">
+    <div class="modal">
+      <div class="modal-icon">⚠️</div>
+      <h2>Ollama Not Detected</h2>
+      <p>Phoenix AI can't connect to Ollama. Make sure it's installed and running.</p>
+      <div class="modal-steps">
+        <strong>Quick Setup:</strong><br/>
+        1. Download Ollama from <a href="https://ollama.com" target="_blank">ollama.com</a><br/>
+        2. Install and open it<br/>
+        3. Pull a model: <code>ollama pull llama3.2</code><br/>
+        4. It runs automatically on <strong>localhost:11434</strong><br/><br/>
+        <strong>CORS fix (if needed):</strong><br/>
+        Set environment variable: <code>OLLAMA_ORIGINS=*</code>
+      </div>
+      <button class="modal-btn" id="retry-connection-btn">Retry Connection</button>
+    </div>
+  </div>
+
+  <!-- ===== Error Toast ===== -->
+  <div class="error-toast" id="error-toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
