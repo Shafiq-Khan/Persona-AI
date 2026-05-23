@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Learn how Persona AI keeps chatbot conversations private by running with your local Ollama setup." />
+  <title>Persona AI - Privacy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="landing-page stack-page privacy-page">
+  <div id="landing-app">
+    <header class="site-header">
+      <a class="site-brand" href="index.html" aria-label="Persona AI home">
+        <span class="brand-mark">P</span>
+        <span>Persona AI</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#features">Features</a>
+        <a class="stack-nav-link" href="privacy.html">Privacy</a>
+        <a class="stack-nav-link" href="workflow.html">Workflow</a>
+        <a class="stack-nav-link" href="tech-stack.html">Tech Stack</a>
+        <a class="nav-chat-button chat-link" href="chat.html">Talk to AI</a>
+      </nav>
+    </header>
+
+    <main class="privacy-main">
+      <div class="privacy-shield" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <section class="privacy-hero">
+        <div class="privacy-hero-copy">
+          <p class="hero-kicker">Local-first privacy</p>
+          <h1>Privacy</h1>
+          <p>
+            Persona AI is designed around your local Ollama setup. Your chat experience runs in the browser, talks to
+            your local model endpoint, and keeps the assistant close to your machine.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-cta chat-link" href="chat.html?prompt=Explain%20how%20Persona%20AI%20keeps%20my%20chat%20private">Ask About Privacy</a>
+            <a class="secondary-cta" href="index.html">Back Home</a>
+          </div>
+        </div>
+
+        <div class="privacy-vault" aria-label="Persona AI privacy preview">
+          <div class="vault-ring"></div>
+          <div class="vault-core">
+            <span>Local</span>
+            <strong>Private Chat</strong>
+            <p>Browser to localhost</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="privacy-principles" aria-label="Privacy principles">
+        <article>
+          <span>01</span>
+          <h2>Local Runtime</h2>
+          <p>Persona AI talks to Ollama on your machine instead of depending on a remote chatbot service.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>Browser Storage</h2>
+          <p>Conversations and model preferences are stored in your browser using local storage.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>You Control It</h2>
+          <p>Clear the chat anytime, switch models, and decide what prompts you share with the assistant.</p>
+        </article>
+      </section>
+
+      <section class="privacy-route" aria-label="Privacy data route">
+        <div>User Prompt</div>
+        <div>Browser UI</div>
+        <div>localhost:11434</div>
+        <div>Local Model</div>
+      </section>
+    </main>
+    <a class="floating-chat chat-link" href="chat.html">Talk to Persona</a>
+  </div>
+  <div class="page-transition" aria-hidden="true">
+    <span>Opening Persona AI</span>
+  </div>
+  <script src="landing.js"></script>
+</body>
+
+</html>

@@ -2045,6 +2045,447 @@ body.landing-page::before {
   margin-bottom: 32px;
 }
 
+/* --- Workflow Page --- */
+.workflow-page {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(124, 58, 237, 0.2), transparent 32%),
+    radial-gradient(circle at 82% 18%, rgba(0, 212, 196, 0.17), transparent 34%),
+    linear-gradient(180deg, #040814, #060a16 48%, #040814);
+}
+
+.workflow-main {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.workflow-hero-page {
+  min-height: calc(100vh - 76px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  align-items: center;
+  gap: clamp(34px, 6vw, 82px);
+  padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px) 56px;
+}
+
+.workflow-hero-copy {
+  animation: hero-enter 760ms ease both;
+}
+
+.workflow-hero-copy h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(3.4rem, 8vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #f8fafc, #c4b5fd 35%, #7ee7d7 72%, #f8fafc);
+  background-size: 190% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-shift 8s ease-in-out infinite;
+}
+
+.workflow-hero-copy p {
+  max-width: 620px;
+  color: #cbd5e1;
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.75;
+  margin-bottom: 30px;
+}
+
+.workflow-device {
+  min-height: 500px;
+  padding: 18px;
+  border: 1px solid rgba(126, 231, 215, 0.22);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(8, 14, 28, 0.86), rgba(4, 8, 20, 0.96)),
+    linear-gradient(120deg, rgba(124, 58, 237, 0.08), rgba(0, 212, 196, 0.08));
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5), 0 0 44px rgba(124, 58, 237, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  animation: terminal-in 850ms 120ms ease both, workflow-device-float 6.5s ease-in-out 1s infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow-device::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(126, 231, 215, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 231, 215, 0.035) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: signal-drift 18s linear infinite;
+}
+
+.workflow-device > * {
+  position: relative;
+  z-index: 1;
+}
+
+.workflow-device-top {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(126, 231, 215, 0.12);
+  padding-bottom: 14px;
+  margin-bottom: 10px;
+}
+
+.workflow-device-top span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.75);
+  animation: status-pulse 1.8s ease-in-out infinite;
+}
+
+.workflow-live-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+  align-items: center;
+  min-height: 92px;
+  padding: 16px;
+  border: 1px solid rgba(126, 231, 215, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  animation: workflow-step-glow 5s ease-in-out infinite;
+}
+
+.workflow-live-step:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.workflow-live-step:nth-child(4) {
+  animation-delay: 1.6s;
+}
+
+.workflow-live-step span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--gradient-phoenix);
+  color: #041014;
+  font-weight: 950;
+}
+
+.workflow-live-step p {
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.workflow-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding: 0 clamp(20px, 5vw, 72px) 56px;
+}
+
+.workflow-timeline article {
+  min-height: 250px;
+  padding: 24px;
+  border: 1px solid rgba(126, 231, 215, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  position: relative;
+  overflow: hidden;
+  animation: stack-card-in 620ms ease both;
+  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.workflow-timeline article:nth-child(2) { animation-delay: 110ms; }
+.workflow-timeline article:nth-child(3) { animation-delay: 220ms; }
+.workflow-timeline article:nth-child(4) { animation-delay: 330ms; }
+
+.workflow-timeline article:hover {
+  transform: translateY(-10px);
+  border-color: rgba(126, 231, 215, 0.44);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.36), 0 0 30px rgba(124, 58, 237, 0.1);
+}
+
+.workflow-timeline span {
+  display: block;
+  color: var(--accent-cyan);
+  font-weight: 950;
+  margin-bottom: 42px;
+}
+
+.workflow-timeline h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.workflow-timeline p {
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.workflow-loop {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 clamp(20px, 5vw, 72px) 80px;
+  border: 1px solid rgba(126, 231, 215, 0.16);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.workflow-loop div {
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  color: var(--text-primary);
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  font-weight: 950;
+  background: rgba(255, 255, 255, 0.032);
+  animation: loop-wave 4.8s ease-in-out infinite;
+}
+
+.workflow-loop div:nth-child(2) { animation-delay: 0.5s; }
+.workflow-loop div:nth-child(3) { animation-delay: 1s; }
+.workflow-loop div:nth-child(4) { animation-delay: 1.5s; }
+
+/* --- Privacy Page --- */
+.privacy-page {
+  background:
+    radial-gradient(circle at 24% 18%, rgba(34, 197, 94, 0.14), transparent 30%),
+    radial-gradient(circle at 78% 18%, rgba(0, 212, 196, 0.18), transparent 34%),
+    linear-gradient(180deg, #040814, #050d16 48%, #040814);
+}
+
+.privacy-main {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.privacy-shield {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.privacy-shield span {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(126, 231, 215, 0.08);
+  border-radius: 50%;
+  animation: shield-ripple 8s ease-in-out infinite;
+}
+
+.privacy-shield span:nth-child(1) {
+  left: 8%;
+  top: 24%;
+}
+
+.privacy-shield span:nth-child(2) {
+  right: 8%;
+  top: 18%;
+  animation-delay: 1.8s;
+}
+
+.privacy-shield span:nth-child(3) {
+  left: 42%;
+  bottom: 8%;
+  animation-delay: 3.6s;
+}
+
+.privacy-hero {
+  min-height: calc(100vh - 76px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  align-items: center;
+  gap: clamp(34px, 6vw, 82px);
+  padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px) 56px;
+}
+
+.privacy-hero-copy {
+  animation: hero-enter 760ms ease both;
+}
+
+.privacy-hero-copy h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(3.4rem, 8vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #f8fafc, #bbf7d0 34%, #7ee7d7 74%, #f8fafc);
+  background-size: 190% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-shift 8s ease-in-out infinite;
+}
+
+.privacy-hero-copy p {
+  max-width: 620px;
+  color: #cbd5e1;
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.75;
+  margin-bottom: 30px;
+}
+
+.privacy-vault {
+  min-height: 500px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(126, 231, 215, 0.22);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle, rgba(34, 197, 94, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(8, 14, 28, 0.86), rgba(4, 8, 20, 0.96));
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48), 0 0 46px rgba(34, 197, 94, 0.08);
+  position: relative;
+  overflow: hidden;
+  animation: terminal-in 850ms 120ms ease both, workflow-device-float 6.5s ease-in-out 1s infinite;
+}
+
+.vault-ring {
+  width: min(72%, 330px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(126, 231, 215, 0.18);
+  position: absolute;
+  animation: vault-spin 14s linear infinite;
+}
+
+.vault-ring::before,
+.vault-ring::after {
+  content: '';
+  position: absolute;
+  inset: 28px;
+  border-radius: 50%;
+  border: 1px dashed rgba(126, 231, 215, 0.2);
+}
+
+.vault-ring::after {
+  inset: 68px;
+  border-style: solid;
+  border-color: rgba(34, 197, 94, 0.18);
+  animation: vault-spin 9s linear infinite reverse;
+}
+
+.vault-core {
+  width: min(52%, 240px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  border: 1px solid rgba(126, 231, 215, 0.26);
+  border-radius: 50%;
+  background: rgba(4, 8, 20, 0.78);
+  box-shadow: inset 0 0 30px rgba(126, 231, 215, 0.08), 0 0 50px rgba(34, 197, 94, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.vault-core span {
+  color: var(--accent-cyan);
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+}
+
+.vault-core strong {
+  color: var(--text-primary);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  text-align: center;
+}
+
+.vault-core p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+.privacy-principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 0 clamp(20px, 5vw, 72px) 56px;
+}
+
+.privacy-principles article {
+  min-height: 245px;
+  padding: 24px;
+  border: 1px solid rgba(126, 231, 215, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  animation: stack-card-in 620ms ease both;
+  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.privacy-principles article:nth-child(2) { animation-delay: 110ms; }
+.privacy-principles article:nth-child(3) { animation-delay: 220ms; }
+
+.privacy-principles article:hover {
+  transform: translateY(-10px);
+  border-color: rgba(126, 231, 215, 0.44);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.36), 0 0 30px rgba(34, 197, 94, 0.1);
+}
+
+.privacy-principles span {
+  display: block;
+  color: #bbf7d0;
+  font-weight: 950;
+  margin-bottom: 44px;
+}
+
+.privacy-principles h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.privacy-principles p {
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.privacy-route {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 clamp(20px, 5vw, 72px) 80px;
+  border: 1px solid rgba(126, 231, 215, 0.16);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.privacy-route div {
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  color: var(--text-primary);
+  font-size: clamp(0.98rem, 2vw, 1.25rem);
+  font-weight: 950;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.032);
+  animation: privacy-route-pulse 4.8s ease-in-out infinite;
+}
+
+.privacy-route div:nth-child(2) { animation-delay: 0.5s; }
+.privacy-route div:nth-child(3) { animation-delay: 1s; }
+.privacy-route div:nth-child(4) { animation-delay: 1.5s; }
+
 .back-home {
   min-height: 36px;
   display: inline-flex;
@@ -2081,7 +2522,13 @@ body.landing-page::before {
   .stack-grid,
   .stack-hero,
   .stack-showcase,
-  .stack-flow {
+  .stack-flow,
+  .workflow-hero-page,
+  .workflow-timeline,
+  .workflow-loop,
+  .privacy-hero,
+  .privacy-principles,
+  .privacy-route {
     grid-template-columns: 1fr;
   }
 
@@ -2308,6 +2755,62 @@ body.landing-page::before {
   }
   50% {
     background: rgba(126, 231, 215, 0.055);
+  }
+}
+
+@keyframes workflow-device-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
+}
+
+@keyframes workflow-step-glow {
+  0%, 100% {
+    border-color: rgba(126, 231, 215, 0.14);
+    background: rgba(255, 255, 255, 0.035);
+  }
+  50% {
+    border-color: rgba(126, 231, 215, 0.38);
+    background: rgba(126, 231, 215, 0.065);
+  }
+}
+
+@keyframes loop-wave {
+  0%, 100% {
+    background: rgba(255, 255, 255, 0.032);
+    color: var(--text-primary);
+  }
+  50% {
+    background: rgba(124, 58, 237, 0.12);
+    color: #dffcf8;
+  }
+}
+
+@keyframes shield-ripple {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.08;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.28;
+  }
+}
+
+@keyframes vault-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes privacy-route-pulse {
+  0%, 100% {
+    background: rgba(255, 255, 255, 0.032);
+  }
+  50% {
+    background: rgba(34, 197, 94, 0.1);
   }
 }
 
